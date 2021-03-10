@@ -2,4 +2,4 @@
 
 **How to Run:**
 
-           ./Create-extra-tables-schema-and-data-dump-for-all-suites <OS-API-Testing directory path
+           ./Create-extra-tables-schema-and-data-dump-for-all-suites.sh <OS-API-Testing directory path
