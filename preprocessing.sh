@@ -34,6 +34,8 @@ unzipTheDumps()
 	#Extracts Distribution orders suite dump file.
 	unzip -o distribution_orders/os_fresh.zip -d distribution_orders/
 
+	#Extracts forms suite dump file.
+        unzip -o forms/os_fresh.zip -d forms/
 }
 
 

@@ -14,7 +14,7 @@ CreateExtraTablesSchemaAndDataDump()
    while read PRESENT_TABLES
    do
      IGNORED_TABLES_STRING+=" --ignore-table=os_mysql.${PRESENT_TABLES}"
-   done < os_tables.csv
+   done < /home/krishagni/Desktop/Testing-suite-scripts/os_tables.csv
 
    # Exports extra tables schema
    mysqldump -u$DB_USER -p$DB_PASS --no-data --complete-insert ${IGNORED_TABLES_STRING} $DB_NAME > $DB_EXTRA_TABLES_SCHEMA_FILE
@@ -38,13 +38,15 @@ DropAndCreateDatabase()
 
 CreateVisitsExtraTablesSchemaAndDataDump()
 {
+  echo "Visits"
   DropAndCreateDatabase
   mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/Visits.sql
   CreateExtraTablesSchemaAndDataDump
   mv os_fresh.zip src/test/resources/visits/
 }
 CreateUsersExtraTablesSchemaAndDataDump()
-{
+{ 
+  echo "Users"
   DropAndCreateDatabase
   mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/Users.sql
   CreateExtraTablesSchemaAndDataDump
@@ -52,6 +54,7 @@ CreateUsersExtraTablesSchemaAndDataDump()
 }
 CreateUserRolesExtraTablesSchemaAndDataDump()
 {
+  echo "User Roles"
   DropAndCreateDatabase
   mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/User-roles.sql
   CreateExtraTablesSchemaAndDataDump
@@ -59,6 +62,7 @@ CreateUserRolesExtraTablesSchemaAndDataDump()
 }
 CreateSitesExtraTablesSchemaAndDataDump()
 {
+  echo "Sites"
   DropAndCreateDatabase
   mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/Sites.sql
   CreateExtraTablesSchemaAndDataDump
@@ -66,13 +70,15 @@ CreateSitesExtraTablesSchemaAndDataDump()
 }
 CreateParticipantsExtraTablesSchemaAndDataDump()
 {
+  echo "Participants"
   DropAndCreateDatabase
   mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/Participants.sql
   CreateExtraTablesSchemaAndDataDump
   mv os_fresh.zip src/test/resources/participants/
 }
 CreateInstitutesExtraTablesSchemaAndDataDump()
-{
+{ 
+  echo "Institutes"
   DropAndCreateDatabase
   mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/Institutes.sql
   CreateExtraTablesSchemaAndDataDump
@@ -80,6 +86,7 @@ CreateInstitutesExtraTablesSchemaAndDataDump()
 }
 CreateDistributionProtocolsExtraTablesSchemaAndDataDump()
 {
+  echo "Distribution Protocols"
   DropAndCreateDatabase
   mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/Distribution-Protocols.sql
   CreateExtraTablesSchemaAndDataDump
@@ -87,6 +94,7 @@ CreateDistributionProtocolsExtraTablesSchemaAndDataDump()
 }
 CreateDistributionOrdersExtraTablesSchemaAndDataDump()
 {
+  echo "Distribution Orders"
   DropAndCreateDatabase
   mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/Distribution-Orders.sql
   CreateExtraTablesSchemaAndDataDump
@@ -94,10 +102,19 @@ CreateDistributionOrdersExtraTablesSchemaAndDataDump()
 }
 CreateCpsExtraTablesSchemaAndDataDump()
 {  
+  echo "CPs"
   DropAndCreateDatabase
   mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/Collection-Protocols.sql
   CreateExtraTablesSchemaAndDataDump
   mv os_fresh.zip src/test/resources/cps/
+}
+CreateFormsExtraTablesSchemaAndDataDump()
+{  
+  echo "Forms"
+  DropAndCreateDatabase
+  mysql -u$DB_USER -p$DB_PASS $DB_NAME < TC-Specific-Dumps/Forms.sql
+  CreateExtraTablesSchemaAndDataDump
+  mv os_fresh.zip src/test/resources/forms/
 }
 
 CreateDumps()
@@ -112,6 +129,7 @@ CreateDumps()
   CreateUserRolesExtraTablesSchemaAndDataDump
   CreateUsersExtraTablesSchemaAndDataDump
   CreateVisitsExtraTablesSchemaAndDataDump
+  CreateFormsExtraTablesSchemaAndDataDump
 }
 
 if [ -d "$workSpace" ]
